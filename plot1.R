@@ -1,0 +1,7 @@
+library(lubridate)
+library(png)
+png("plot1.png", width = 480, height = 480)
+data <- read.csv("./household_power_consumption.txt", sep = ";", na.strings = "?")
+power <- subset(data, data$Date == "2/1/2007" | data$Date == "2/2/2007")
+hist(power$Global_active_power, main = "Global Active Power", xlab = "Global Active Power (Kilowatts)", col = "red")
+dev.off()

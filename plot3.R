@@ -1,0 +1,11 @@
+library(lubridate)
+png("plot3.png", width = 480, height = 480)
+data <- read.csv("./household_power_consumption.txt", sep = ";", na.strings = "?")
+power <- subset(data, data$Date == "2/1/2007" | data$Date == "2/2/2007")
+power$DateTime <- strptime(paste(power$Date, power$Time), "%m/%d/%Y %H:%M:%S")
+
+plot(power$DateTime, power$Sub_metering_3, col = "blue", type = "l", xlab = "", ylab = "Energy sub metering")
+lines(power$DateTime, power$Sub_metering_2, col = "red", type = "l")
+lines(power$DateTime, power$Sub_metering_1, col = "black", type = "l")
+legend("topright",  pch = 4, col = c("black", "red", "blue"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+dev.off()
